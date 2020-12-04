@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+/IngeneosTest.Application/obj
+/IngeneosTest.Application/bin/Debug/netcoreapp3.1
+/IngeneosTest.Core/bin/Debug/netcoreapp3.1
+/IngeneosTest.Core/obj
+/IngeneosTest.EntityFrameworkCore/bin/Debug/netcoreapp3.1
+/IngeneosTest.EntityFrameworkCore/obj
+/IngeneosTest.Service/bin/Debug/net5.0
+/IngeneosTest.Service/obj
