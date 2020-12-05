@@ -6,7 +6,6 @@ namespace IngeneosTest.EntityFrameworkCore.UnitOfWork
     {
         IAuthorRepository Authors { get; }
         IBookRepository Books { get; }
-        IUserRepository Users { get; }
         int SaveChanges();
     }
 }

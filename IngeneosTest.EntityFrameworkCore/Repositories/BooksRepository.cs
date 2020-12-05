@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using IngeneosTest.Core.Model;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace IngeneosTest.EntityFrameworkCore.Repositories
 {
@@ -20,14 +21,18 @@ namespace IngeneosTest.EntityFrameworkCore.Repositories
             await DbContext.Books.AddAsync(book);         
         }
 
-        public async Task<List<Book>> GetsAllAsync()
+        public async Task<List<Book>> GetsAllAsync(int idAuthor, DateTime InitialPublishDate, DateTime FinalPublishDate)
         {
-            return await DbContext.Books.ToListAsync();
+            var books = DbContext.Books
+                                 .Where(p => 
+                                    (p.Id == idAuthor || idAuthor == 0) && 
+                                    (InitialPublishDate.Year == 1 || (p.PublishDate <= InitialPublishDate && p.PublishDate >= FinalPublishDate)));
+            return await books.ToListAsync();
         }
 
-        public async Task<Book> GetBookAsync(int idAuthor)
+        public async Task<Book> GetBookAsync(int idBook)
         {
-            return await DbContext.Books.FirstOrDefaultAsync(p => p.Id == idAuthor);
+            return await DbContext.Books.FirstOrDefaultAsync(p => p.Id == idBook);
         }
     }
 }
