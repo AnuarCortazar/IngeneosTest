@@ -12,10 +12,10 @@ namespace IngeneosTest.Application.Services
             return _mapper.Map<AuthorDto>(await UnitOfWork.Books.GetBookAsync(idBook));
         }
 
-        public async Task<List<AuthorDto>> GetAllAuthorsAsync(AuthorInput input)
+        public async Task<List<AuthorDto>> GetAllAuthorsAsync()
         {
-            var books = await UnitOfWork.Authors.GetsAllAsync();
-            return _mapper.Map<List<AuthorDto>>(books);
+            var books = _mapper.Map<List<AuthorDto>>(await UnitOfWork.Authors.GetsAllAsync());
+            return books;
         }
     }
 }

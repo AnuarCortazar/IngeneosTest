@@ -1,0 +1,23 @@
+<h2>Author's List</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">FirtName</th>
+        <th scope="col">LastName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of authors;">
+        <th scope="row">{{ author.id }}</th>
+        <td>{{ author.firstName }}</td>
+        <td>{{ author.lastName }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadAuthors()">
+    </ngb-pagination>
+</div>

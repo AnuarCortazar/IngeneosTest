@@ -26,7 +26,7 @@ namespace IngeneosTest.EntityFrameworkCore.Repositories
             var books = DbContext.Books
                                  .Where(p => 
                                     (p.Id == idAuthor || idAuthor == 0) && 
-                                    (InitialPublishDate.Year == 1 || (p.PublishDate <= InitialPublishDate && p.PublishDate >= FinalPublishDate)));
+                                    (InitialPublishDate.Year == 1 || (InitialPublishDate >= p.PublishDate && p.PublishDate <= FinalPublishDate)));
             return await books.ToListAsync();
         }
 

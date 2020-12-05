@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" *ngIf="isLoggendIn">
+    <a class="navbar-brand" href="#">Catalogos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+                routerLinkActive="active" routerLink="/books">Libros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/authors">Autores</a>
+        </li>        
+      </ul>
+    </div>
+    
+    <button class="btn btn-md btn-primary" (click)="sync(content)">Sincronizar informacion</button>    
+</nav>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>La informacion ha sido sincronizada correctamente.</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Close</button>
+  </div>
+</ng-template>

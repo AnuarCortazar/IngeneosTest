@@ -11,7 +11,7 @@ namespace IngeneosTest.Application.Contract
         Task<BookDto> GetBookAsync(int idBook);
         Task<AuthorDto> GetAuthorAsync(int idBook);
         Task<List<BookDto>> GetAllBooksAsync(BookInput input);
-        Task<List<AuthorDto>> GetAllAuthorsAsync(AuthorInput input);
+        Task<List<AuthorDto>> GetAllAuthorsAsync();
         Task<AuthenticationResult> LoginUser(User user);
     }
 }

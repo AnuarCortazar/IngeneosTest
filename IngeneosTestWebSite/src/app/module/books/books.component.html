@@ -1,0 +1,73 @@
+<h2>Book's List</h2>
+<div class="row">
+  <div class="col-12">
+      <div class="panel">
+        <div class="panel-header">
+          <form class="form-inline">
+            <div class="form-group mr-4">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" [(ngModel)]="modelInitial" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mr-4">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp2" [(ngModel)]="modelFinal" ngbDatepicker #d2="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="loadBooks()">Buscar</button>
+            <button class="btn btn-primary ml-3" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:24px;"></i></button>
+            
+          </form>         
+        </div>
+        <br />
+        <div class="panel-body">          
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">PageCount</th>
+                  <th scope="col">Excerpt</th>
+                  <th scope="col">PublishDate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of books; index as i">
+                  <th scope="row">{{ book.id }}</th>
+                  <td>{{ book.title }}</td>
+                  <td>{{ (book.description.length > 100) ? (book.description | slice:0:100) + '...': book.description }}</td>
+                  <td>{{ book.pageCount | number }}</td>
+                  <td>{{ (book.excerpt.length > 150) ? (book.excerpt | slice:0:150) + '...': book.excerpt }}</td>
+                  <td>{{ book.publishDate | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="loadBooks()">
+              </ngb-pagination>
+          </div>
+
+        </div>
+      </div>
+  </div>
+</div>
+
+

@@ -22,7 +22,7 @@ namespace IngeneosTest.EntityFrameworkCore.Repositories
 
         public async Task<List<Author>> GetsAllAsync()
         {
-            return await DbContext.Authors.Include(p => p.Book).ToListAsync();
+            return await DbContext.Authors.ToListAsync();
         }
 
         public async Task<Author> GetByIdAsync(int idAuthor)

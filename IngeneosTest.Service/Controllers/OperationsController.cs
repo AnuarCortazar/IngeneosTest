@@ -1,6 +1,8 @@
 ﻿using IngeneosTest.Application.Contract;
 using IngeneosTest.Application.Dto;
 using IngeneosTest.Core.Model;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -8,6 +10,7 @@ namespace IngeneosTest.Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OperationsController : ControllerBase
     {
         public readonly IManageService _manageService;
@@ -24,10 +27,10 @@ namespace IngeneosTest.Service.Controllers
             return Ok(await _manageService.SynchronizeInformation());
         }
         [Route("authors")]
-        [HttpPost]
-        public async Task<ActionResult> GetAuthors(AuthorInput input)
+        [HttpGet]
+        public async Task<ActionResult> GetAuthors()
         {
-            return Ok(await _manageService.GetAllAuthorsAsync(input));
+            return Ok(await _manageService.GetAllAuthorsAsync());
         }
         [Route("authors/{idAuthor}")]
         [HttpGet]
@@ -46,13 +49,6 @@ namespace IngeneosTest.Service.Controllers
         public async Task<ActionResult> GetBooksById(int idBook)
         {
             return Ok(await _manageService.GetBookAsync(idBook));
-        }
-
-        [Route("login")]
-        [HttpPost]
-        public async Task<ActionResult> LoginUser(User user)
-        {
-            return Ok(await _manageService.LoginUser(user));
         }
     }
 }
