@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IngeneosTest.Application.Dto
 {
-    public class UserDto
+    public class AuthorInput
     {
 
     }

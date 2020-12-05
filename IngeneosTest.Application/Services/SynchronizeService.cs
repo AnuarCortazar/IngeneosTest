@@ -1,14 +1,14 @@
 ﻿
+using AutoMapper;
 using IngeneosTest.Application.Contract;
+using IngeneosTest.Core.Configuration;
 using IngeneosTest.Core.Helpers;
 using IngeneosTest.Core.Model;
 using IngeneosTest.EntityFrameworkCore;
 using IngeneosTest.EntityFrameworkCore.UnitOfWork;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IngeneosTest.Application.Services
@@ -16,12 +16,16 @@ namespace IngeneosTest.Application.Services
     public partial class ManageService : IManageService
     {
         readonly string fakeServiceUrlBase;
+        readonly IMapper _mapper;
+        readonly JwtSettings _jwtSettings;
         public IConfiguration Configuration { get; set; }
         private IUnitOfWork UnitOfWork { get; set; }
-        public ManageService(AppDbContext context, IConfiguration configuration)
+        public ManageService(AppDbContext context, IConfiguration configuration, IMapper mapper, JwtSettings jwtSettings)
         {
+            _mapper = mapper;
+            _jwtSettings = jwtSettings;
             UnitOfWork = new UnitOfWork(context);
-            fakeServiceUrlBase = configuration.GetSection("fakeServiceUri").Value;
+            fakeServiceUrlBase = configuration.GetSection("fakeServiceUri").Value;            
         }
 
         public async Task<bool> SynchronizeInformation()
